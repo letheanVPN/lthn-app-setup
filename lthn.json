@@ -3,6 +3,6 @@
   "name": "System Setup",
   "app": {
     "type": "zip",
-    "url": "https://github.com/letheanVPN/lthn-app-setup/archive/refs/tags/v0.0.1.zip"
+    "url": "https://github.com/letheanVPN/lthn-app-setup/releases/download/v0.0.3/package.zip"
   }
 }
