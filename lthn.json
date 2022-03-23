@@ -1,8 +1,8 @@
 {
   "name": "lthn-app-setup",
   "display-name": "System Setup",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/letheanVPN/lthn-app-setup.git"
+  "app": {
+    "type": "zip",
+    "url": "https://github.com/letheanVPN/lthn-app-setup/archive/refs/tags/v0.0.1.zip"
   }
 }
