@@ -24,9 +24,11 @@ jobs:
       id: get_version
       if: startsWith(github.ref, 'refs/tags/')
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-    - uses: montudor/action-zip@v1
-      with:
-        args: cd dist && zip -qq -r setup-${{ steps.get_version.outputs.VERSION }}.zip .
+    - name: Install zip
+      uses: montudor/action-zip@v1
+    - name: package
+      working-directory: dist/
+      run: zip -qq -r ../setup-${{ steps.get_version.outputs.VERSION }}.zip .
     - uses: actions/upload-artifact@v2
       with:
         name: setup-${{ steps.get_version.outputs.VERSION }}
