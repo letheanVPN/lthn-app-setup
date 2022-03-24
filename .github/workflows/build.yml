@@ -19,7 +19,7 @@ jobs:
     - uses: denoland/setup-deno@v1
       with:
         deno-version: v1.20.x
-    - run: mkdir -p dist/setup && cp lthn.json dist/lthn.json
+    - run: mkdir -p dist/setup && cp lthn.json dist/setup/lthn.json
     - run: deno run -A --unstable https://raw.githubusercontent.com/letheanVPN/denobundle/master/main.js dist/setup lthn-app-setup.bundle.js
     - name: Get the version
       id: get_version
