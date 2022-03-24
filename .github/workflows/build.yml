@@ -16,16 +16,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.20.x
+    - run: mkdir -p dist/setup && cp lthn.json dist/lthn.json
+    - run: deno run -A --unstable https://raw.githubusercontent.com/letheanVPN/denobundle/master/main.js dist/setup lthn-app-setup.bundle.js
+    - name: Get the version
+      id: get_version
+      if: startsWith(github.ref, 'refs/tags/')
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
     - uses: montudor/action-zip@v1
       with:
-        args: zip -qq -r package.zip  .
+        args: zip -qq -r setup-${{ steps.get_version.outputs.VERSION }}.zip lthn-app-setup.bundle.js
     - uses: actions/upload-artifact@v2
       with:
-        name: Package
-        path: package.zip
+        name: setup-${{ steps.get_version.outputs.VERSION }}
+        path: setup-${{ steps.get_version.outputs.VERSION }}.zip
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: package.zip
+        files: setup-${{ steps.get_version.outputs.VERSION }}.zip
 
